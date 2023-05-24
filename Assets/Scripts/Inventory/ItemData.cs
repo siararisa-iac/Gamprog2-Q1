@@ -8,7 +8,8 @@ public class ItemData
     public string id;
     public Sprite icon;
     public ItemType type;
-    public Status status;
+    public EquipmentSlotType slotType;
+    public List<Attribute> attributes;
 }
 
 public enum ItemType
@@ -16,11 +17,32 @@ public enum ItemType
     Consumable,
     Equipabble, 
 }
+public enum EquipmentSlotType
+{
+    None,
+    Head,
+    Armor,
+    Boot,
+    Weapon1,
+    Weapon2
+}
 
 [System.Serializable]
-public struct Status
+public class Attribute
 {
-    public int Strength;
-    public int Agility;
-    public int Vitality;
+    public AttributeType type;
+    public float value;
+
+    public Attribute(AttributeType type, float value)
+    {
+        this.type = type;
+        this.value = value;
+    }
+}
+
+public enum AttributeType
+{
+    Strength,
+    Defense,
+    HP
 }
