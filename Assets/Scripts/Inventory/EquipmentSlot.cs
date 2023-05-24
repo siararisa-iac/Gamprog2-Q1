@@ -13,22 +13,16 @@ public class EquipmentSlot : MonoBehaviour
 
     public void SetItem(ItemData data)
     {
-        itemData = data;
-        defaultIcon.gameObject.SetActive(false);
-        itemIcon.gameObject.SetActive(true);
-        itemIcon.sprite = data.icon;
-        InventoryManager.Instance.player.AddAttributes(itemData.attributes);
+        // TODO
+        // Set the item data the and icons here
+        // Make sure to apply the attributes once an item is equipped
     }
 
     public void Unequip()
     {
-        int availableSlot = InventoryManager.Instance.GetEmptyInventorySlot();
-        if (availableSlot == -1) return;
-        InventoryManager.Instance.player.RemoveAttributes(itemData.attributes);
-        InventoryManager.Instance.AddItem(itemData.id);
-        defaultIcon.gameObject.SetActive(true);
-        itemIcon.gameObject.SetActive(false);
-        itemIcon.sprite = null;
-        itemData = null;
+        // TODO
+        // Check if there is an available inventory slot before removing the item.
+        // Make sure to return the equipment to the inventory when there is an available slot.
+        // Reset the item data and icons here
     }
 }
