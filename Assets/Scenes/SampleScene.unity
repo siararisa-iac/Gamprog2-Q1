@@ -603,7 +603,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471866464}
-  m_LocalRotation: {x: 0.14160167, y: -1e-45, z: -0, w: 0.9899237}
+  m_LocalRotation: {x: 0.14160167, y: 1e-45, z: -0, w: 0.9899237}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -966,12 +966,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9f91d25622473468f3be5cdbda212b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
+  sprintSpeed: 5
   rotationSmoothTime: 0.1
   camera: {fileID: 0}
   gravityScale: 1
   groundedVelocity: -0.5
   jumpHeight: 3
+  SpeedChangeRate: 10
+  JumpTimeout: 0.5
+  FallTimeout: 0.15
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.28
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &860898525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7792392894415966996, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
@@ -1335,7 +1345,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258781985}
-  m_LocalRotation: {x: 0.17746714, y: -0.000000017050372, z: 0.000000003074687, w: 0.98412675}
+  m_LocalRotation: {x: 0.17746714, y: -0.000000018931955, z: 0.000000003413992, w: 0.98412675}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2147,7 +2157,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775040247}
-  m_LocalRotation: {x: 0.15953702, y: 1e-45, z: -0, w: 0.987192}
+  m_LocalRotation: {x: 0.15953702, y: -1e-45, z: -0, w: 0.987192}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2497,6 +2507,14 @@ PrefabInstance:
     - target: {fileID: 116078256839175526, guid: a6f09d5db22191d428886190f87f6c01, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 116078256839175526, guid: a6f09d5db22191d428886190f87f6c01, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 116078256839175526, guid: a6f09d5db22191d428886190f87f6c01, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6f09d5db22191d428886190f87f6c01, type: 3}
