@@ -64,14 +64,36 @@ public class InventoryManager : MonoBehaviour
     {
         //TODO
         //1. Cycle through every item in the database until you find the item with the same id.
-        //2. Get the index of the InventorySlot that does not have any Item and set its Item to the Item found
+        for(int i = 0; i < itemDatabase.Count; i++)
+        {
+            //Check if the id matches
+            if (itemDatabase[i].id == itemID)
+            {
+                //2. Get the index of the InventorySlot that does not have any Item and set its Item to the Item found
+                GetEmptyInventorySlot().SetItem(itemDatabase[i]);
+            }
+        }
     }
 
-    public int GetEmptyInventorySlot()
+    public int GetEmptyInventorySlotIndex()
     {
         //TODO
         //Check which inventory slot doesn't have an Item and return its index
+        for(int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (!inventorySlots[i].HasItem()) return i;
+        }
+        // default return
         return -1;
+    }
+
+    public InventorySlot GetEmptyInventorySlot()
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (!inventorySlots[i].HasItem()) return inventorySlots[i];
+        }
+        return null;
     }
 
     public int GetEquipmentSlot(EquipmentSlotType type)
