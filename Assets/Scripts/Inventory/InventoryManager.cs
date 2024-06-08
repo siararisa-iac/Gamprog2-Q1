@@ -71,7 +71,7 @@ public class InventoryManager : MonoBehaviour
     }
 
    
-    public void AddItem(string itemID)
+    public bool AddItem(string itemID)
     {
         //TODO
         //1. Cycle through every item in the database until you find the item with the same id.
@@ -81,9 +81,13 @@ public class InventoryManager : MonoBehaviour
             if (itemDatabase[i].id == itemID)
             {
                 //2. Get the index of the InventorySlot that does not have any Item and set its Item to the Item found
+                // Dont do anything if the slots are full
+                if (!GetEmptyInventorySlot()) return false;
                 GetEmptyInventorySlot().SetItem(itemDatabase[i]);
+                return true;
             }
         }
+        return false;
     }
 
     public void Unequip(ItemData itemData)
