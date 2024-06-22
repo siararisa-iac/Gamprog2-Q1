@@ -9,12 +9,43 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private List<Transform> spawnPositions;
 
-    private int minimumEnemyCount = 1;
-    private int maximumEnemyCount = 5;
+    [SerializeField] private int minimumEnemyCount = 1;
+    [SerializeField] private int maximumEnemyCount = 5;
+
+    [SerializeField] private float minSpawnTime = 3.0f;
+    [SerializeField] private float maxSpawnTime = 5.0f;
+
+    private int enemyCount = 0;
+    private float spawnTime = 0;
 
     private void Start()
     {
+        // Call coroutines with the StartCoroutine()
+        StartCoroutine(SpawnCoroutine());
+    }
+
+    private IEnumerator SpawnCoroutine()
+    {
+        spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        yield return new WaitForSeconds(spawnTime);
         SpawnEnemies();
+        //After finishing this call, call it again to do the loop
+        StartCoroutine(SpawnCoroutine());
+    }
+
+    private IEnumerator SampleCoroutine()
+    {
+        Debug.Log("Starting to do something");
+        //yield return new WaitForSeconds(5.0f);
+        float timeElapsed = 0;
+        while (timeElapsed < 5.0f)
+        {
+            timeElapsed += Time.deltaTime;
+            Debug.Log(timeElapsed);
+            // This will wait for the next frame before proceeding
+            yield return null;
+        }
+        Debug.Log("Wait has finished");
     }
 
     private void SpawnEnemies()
