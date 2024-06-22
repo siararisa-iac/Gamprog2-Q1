@@ -18,10 +18,19 @@ public class EnemySpawner : MonoBehaviour
     private int enemyCount = 0;
     private float spawnTime = 0;
 
+    private Coroutine spawnCoroutine;
     private void Start()
     {
         // Call coroutines with the StartCoroutine()
-        StartCoroutine(SpawnCoroutine());
+        spawnCoroutine = StartCoroutine(SpawnCoroutine());
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            //StopCoroutine(spawnCoroutine);
+        }
     }
 
     private IEnumerator SpawnCoroutine()
@@ -30,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(spawnTime);
         SpawnEnemies();
         //After finishing this call, call it again to do the loop
-        StartCoroutine(SpawnCoroutine());
+        spawnCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
     private IEnumerator SampleCoroutine()
@@ -53,7 +62,13 @@ public class EnemySpawner : MonoBehaviour
         int enemyCount = Random.Range(minimumEnemyCount, maximumEnemyCount + 1);
         for(int i = 0; i < enemyCount; i++)
         {
-            Instantiate(enemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+            GameObject enemy = ObjectPoolManager.Instance.GetPooledObject("Enemy");
+            if(enemy != null)
+            {
+                enemy.transform.position = GetRandomSpawnPosition();
+                //Enable the gameobject from the pool
+                enemy.gameObject.SetActive(true);
+            }
         }
     }
 

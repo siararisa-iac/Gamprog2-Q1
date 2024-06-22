@@ -36,10 +36,23 @@ public class EnemyController : MonoBehaviour
     {
         // This is a VERY slow function so as much as possible, avoid this
         player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void OnEnable()
+    {
         // Set the default state of the enemy
         currentState = EnemyState.Idle;
         // Set the initial value of the idleTime
         idleTime = Random.Range(minIdleTime, maxIdleTime);
+        StartCoroutine(Disable());
+    }
+
+    private IEnumerator Disable()
+    {
+        //Destroy(this.gameObject, Random.Range(7, 13));
+        int destroyTime = Random.Range(7, 11);
+        yield return new WaitForSeconds(destroyTime);
+        this.gameObject.SetActive(false);
     }
 
     private void Update()
